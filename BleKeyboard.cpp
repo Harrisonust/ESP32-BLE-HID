@@ -351,6 +351,10 @@ const uint8_t _asciimap[128] =
 
 uint8_t USBPutChar(uint8_t c);
 
+void BleKeyboard::applyModifier(const uint8_t m){
+	_keyReport.modifiers = m;
+}
+
 // press() adds the specified key (printing, non-printing, or modifier)
 // to the persistent key report and sends the report.  Because of the way
 // USB HID works, the host acts like the key remains pressed until we
@@ -377,6 +381,7 @@ size_t BleKeyboard::press(uint8_t k)
 
 	// Add k to the key report only if it's not already present
 	// and if there is an empty slot.
+
 	if (_keyReport.keys[0] != k && _keyReport.keys[1] != k &&
 		_keyReport.keys[2] != k && _keyReport.keys[3] != k &&
 		_keyReport.keys[4] != k && _keyReport.keys[5] != k) {

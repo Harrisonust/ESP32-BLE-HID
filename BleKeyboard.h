@@ -152,6 +152,7 @@ public:
   void end(void);
   void sendReport(KeyReport* keys);
   void sendReport(MediaKeyReport* keys);
+  void applyModifier(const uint8_t m);
   size_t press(uint8_t k);
   size_t press(const MediaKeyReport k);
   size_t release(uint8_t k);

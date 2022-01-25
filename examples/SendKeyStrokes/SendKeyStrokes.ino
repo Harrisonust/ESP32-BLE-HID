@@ -23,14 +23,17 @@ bool empty(const uint8_t* buffer, const uint8_t size){
 	return true;
 }
 
+#define BUF_LEN 8
+
 void loop() {
   	if(bleKeyboard.isConnected()) {
-		uint8_t buffer[6];	
-		Serial2.readBytes(buffer, 6);
-		if(!empty(buffer, 6)){
-			for(int i = 0; i < 6; i++){	
+		uint8_t buffer[BUF_LEN];	
+		Serial2.readBytes(buffer, BUF_LEN);
+		if(!empty(buffer, BUF_LEN)){
+			bleKeyboard.applyModifier(buffer[0]);
+			for(int i = 2; i < BUF_LEN; i++)
 				bleKeyboard.write(buffer[i]);
-			}
+			
 		}
 	}
 	delay(1);
